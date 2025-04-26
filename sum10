@@ -1,0 +1,42 @@
+.model small
+.stack 100h
+.data
+    MSG2 db 'I am Sagor. My student id is: IT22059',0ah,0dh,'$'
+    MSG  db 0ah,0dh,'THE SUM OF '
+    C1   db ?,' AND '
+    C2   db ?,' IS '
+    SUM  db ?,' $'
+.code
+
+Main PROC
+    mov ax, @data   
+    mov ds, ax      
+
+    lea dx, MSG2
+    mov ah, 9
+    int 21h
+
+    mov ah, 2
+    mov dl, '?'
+    int 21h
+   
+    mov ah, 1
+    int 21h
+    mov C1, al     
+   
+    int 21h
+    mov C2, al     
+    
+    add al, C1      
+    sub al, 48      
+    mov SUM, al    
+
+    lea dx, MSG
+    mov ah, 9
+    int 21h
+
+    ; Exit
+    mov ah, 4ch
+    int 21h
+Main ENDP
+END Main
